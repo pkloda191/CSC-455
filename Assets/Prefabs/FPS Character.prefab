@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 4970390495491786}
   - component: {fileID: 95489205647440306}
   - component: {fileID: 143789176255354058}
+  - component: {fileID: 114604936669178304}
   m_Layer: 0
   m_Name: FPS Character
   m_TagString: Untagged
@@ -1837,7 +1838,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1218983470939568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.329979, y: 0.05, z: 2.5513725}
+  m_LocalPosition: {x: 4.329979, y: 0.18, z: 2.5513725}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4061054780866908}
@@ -1938,6 +1939,22 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114604936669178304
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1218983470939568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc69b8dbe0359cf44ae0060cb78152d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 6.75
+  runSpeed: 10
+  crouchSpeed: 4
+  jumpSpeed: 8
+  gravity: 20
 --- !u!124 &124071993859705416
 Behaviour:
   m_ObjectHideFlags: 1
