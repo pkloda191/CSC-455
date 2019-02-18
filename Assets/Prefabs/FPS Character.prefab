@@ -203,6 +203,8 @@ GameObject:
   - component: {fileID: 95489205647440306}
   - component: {fileID: 143789176255354058}
   - component: {fileID: 114604936669178304}
+  - component: {fileID: 114150939038535842}
+  - component: {fileID: 114978147256450118}
   m_Layer: 0
   m_Name: FPS Character
   m_TagString: Untagged
@@ -372,6 +374,7 @@ GameObject:
   - component: {fileID: 92028134231541710}
   - component: {fileID: 124071993859705416}
   - component: {fileID: 81328980523904254}
+  - component: {fileID: 114632154108857384}
   m_Layer: 0
   m_Name: FPS Camera
   m_TagString: MainCamera
@@ -1931,7 +1934,7 @@ Animator:
   m_GameObject: {fileID: 1218983470939568}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f3aa36c2aed114223bc6a264d9f9018c, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2afa9a9651a17ff438561f09347431ff, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1939,6 +1942,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114150939038535842
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1218983470939568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad614b6a179f3a24786d9d7c0a165e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axes: 0
 --- !u!114 &114604936669178304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1955,6 +1970,32 @@ MonoBehaviour:
   crouchSpeed: 4
   jumpSpeed: 8
   gravity: 20
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
+--- !u!114 &114632154108857384
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1417588570302334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad614b6a179f3a24786d9d7c0a165e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axes: 1
+--- !u!114 &114978147256450118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1218983470939568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c29d60b7c0a5c48a0ef73290f33b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!124 &124071993859705416
 Behaviour:
   m_ObjectHideFlags: 1

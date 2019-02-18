@@ -91,23 +91,6 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &570858381 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1218983470939568, guid: 12597e4fd37ffc84b84bc41c216aca9f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1749768522}
---- !u!114 &570858386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 570858381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad614b6a179f3a24786d9d7c0a165e11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axes: 0
 --- !u!1 &796098893
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,23 +154,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1092512340 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1417588570302334, guid: 12597e4fd37ffc84b84bc41c216aca9f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1749768522}
---- !u!114 &1092512346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1092512340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad614b6a179f3a24786d9d7c0a165e11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axes: 1
 --- !u!1 &1463955288
 GameObject:
   m_ObjectHideFlags: 0
