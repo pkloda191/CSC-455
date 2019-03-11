@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class CursorController : MonoBehaviour {
 
-	// Use this for initialization
 	void Start () {
-		//Cursor.lockState = CursorLockMode.Locked;
+//		Cursor.lockState = CursorLockMode.Locked;
 	}
 	
+	// Update is called once per frame
 	void Update () {
 		ControlCursor ();
 	}
 
-	void ControlCursor() 
-	{
+	void ControlCursor() {
 		if (Input.GetKeyDown (KeyCode.Tab)) {
 			if (Cursor.lockState == CursorLockMode.Locked) {
 				Cursor.lockState = CursorLockMode.None;
@@ -23,4 +22,42 @@ public class CursorController : MonoBehaviour {
 			}
 		}
 	}
-}
+
+} // class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

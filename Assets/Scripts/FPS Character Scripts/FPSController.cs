@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class FPSController : MonoBehaviour {
+public class FPSController : NetworkBehaviour {
 
 	private Transform firstPerson_View;
 	private Transform firstPerson_Camera;
@@ -49,7 +50,15 @@ public class FPSController : MonoBehaviour {
 	private WeaponManager handsWeapon_Manager;
 	private FPSHandsWeapon current_Hands_Weapon;
 
-	// Use this for initialization
+	public GameObject playerHolder, weaponsHolder;
+	public GameObject[] weapons_FPS;
+	private Camera mainCam;
+	public FPSMouseLook[] mouseLook;
+
+	private Color[] playerColors = new Color[] {new Color(0, 44, 255, 255), 
+		new Color(252, 208, 193, 255), new Color(0, 0, 0, 255)};
+	public Renderer playerRenderer;
+
 	void Start () {
 		firstPerson_View = transform.Find ("FPS View").transform;
 		charController = GetComponent<CharacterController> ();
@@ -67,10 +76,83 @@ public class FPSController : MonoBehaviour {
 
 		handsWeapon_Manager.weapons [0].SetActive (true);
 		current_Hands_Weapon = handsWeapon_Manager.weapons [0].GetComponent<FPSHandsWeapon> ();
+
+		if (isLocalPlayer) {
+			playerHolder.layer = LayerMask.NameToLayer ("Player");
+
+			foreach (Transform child in playerHolder.transform) {
+				child.gameObject.layer = LayerMask.NameToLayer ("Player");
+			}
+
+			for (int i = 0; i < weapons_FPS.Length; i++) {
+				weapons_FPS [i].layer = LayerMask.NameToLayer ("Player");
+			}
+
+			weaponsHolder.layer = LayerMask.NameToLayer ("Enemy");
+
+			foreach (Transform child in weaponsHolder.transform) {
+				child.gameObject.layer = LayerMask.NameToLayer ("Enemy");
+			}
+		}
+
+		if (!isLocalPlayer) {
+			playerHolder.layer = LayerMask.NameToLayer ("Enemy");
+
+			foreach (Transform child in playerHolder.transform) {
+				child.gameObject.layer = LayerMask.NameToLayer ("Enemy");
+			}
+
+			for (int i = 0; i < weapons_FPS.Length; i++) {
+				weapons_FPS [i].layer = LayerMask.NameToLayer ("Enemy");
+			}
+
+			weaponsHolder.layer = LayerMask.NameToLayer ("Player");
+
+			foreach (Transform child in weaponsHolder.transform) {
+				child.gameObject.layer = LayerMask.NameToLayer ("Player");
+			}
+		}
+
+		if (!isLocalPlayer) {
+			for (int i = 0; i < mouseLook.Length; i++) {
+				mouseLook [i].enabled = false;
+			}
+		}
+
+		mainCam = transform.Find ("FPS View").Find ("FPS Camera").GetComponent<Camera> ();
+		mainCam.gameObject.SetActive (false);
+
+		if (!isLocalPlayer) {
+			for (int i = 0; i < playerRenderer.materials.Length; i++) {
+				playerRenderer.materials [i].color = playerColors [i];
+			}
+		}
+
 	}
-	
-	// Update is called once per frame
+
+	public override void OnStartLocalPlayer() {
+		tag = "Player";
+	}
+
 	void Update () {
+
+		if (isLocalPlayer) {
+			if (!mainCam.gameObject.activeInHierarchy) {
+				mainCam.gameObject.SetActive (true);
+			}
+		}
+
+		// IF WE ARE NOT THE LOCAL PLAYER
+		// E.G. MEANING WE ARE NOT RUNNING THIS CODE
+		// ON OUR OWN COMPUTER
+		if (!isLocalPlayer) {
+			// IF THIS IF STATEMENT IS TRUE
+			// AND WE EXECUTE THE return CODE
+			// ALL CODE THAT IS WRITTEN BELOW THE return
+			// WILL NOT BE EXECUTED
+			return;
+		}
+
 		PlayerMovement ();
 		SelectWeapon ();
 	}
@@ -109,14 +191,16 @@ public class FPSController : MonoBehaviour {
 
 		if (is_Grounded) {
 
+			// HERE WE ARE GONNA CALL CROUCH AND SPRINT
 			PlayerCrouchingAndSprinting();
 
 			moveDirection = new Vector3 (inputX * inputModifyFactor, -antiBumpFactor,
 				inputY * inputModifyFactor);
-
+			
 			moveDirection = transform.TransformDirection (moveDirection) * speed;
 
-			PlayerJump ();
+			// HERE WE ARE GONNA CALL JUMP
+			PlayerJump();
 		}
 
 		moveDirection.y -= gravity * Time.deltaTime;
@@ -131,7 +215,7 @@ public class FPSController : MonoBehaviour {
 
 	void PlayerCrouchingAndSprinting() {
 		if (Input.GetKeyDown (KeyCode.C)) {
-
+			
 			if (!is_Crouching) {
 				is_Crouching = true;
 			} else {
@@ -157,7 +241,7 @@ public class FPSController : MonoBehaviour {
 		playerAnimation.PlayerCrouch (is_Crouching);
 
 	}
-		
+
 	bool CanGetUp() {
 		Ray groundRay = new Ray (transform.position, transform.up);
 		RaycastHit groundHit;
@@ -180,7 +264,7 @@ public class FPSController : MonoBehaviour {
 		camHeight = is_Crouching ? default_CamPos.y / 1.5f : default_CamPos.y;
 
 		while (Mathf.Abs (camHeight - firstPerson_View.localPosition.y) > 0.01f) {
-
+			
 			firstPerson_View.localPosition = Vector3.Lerp (firstPerson_View.localPosition,
 				new Vector3 (default_CamPos.x, camHeight, default_CamPos.z),
 				Time.deltaTime * 11f);
@@ -191,9 +275,9 @@ public class FPSController : MonoBehaviour {
 
 	void PlayerJump() {
 		if (Input.GetKeyDown (KeyCode.Space)) {
-
+			
 			if (is_Crouching) {
-
+				
 				if (CanGetUp ()) {
 					is_Crouching = false;
 
@@ -235,6 +319,7 @@ public class FPSController : MonoBehaviour {
 			playerAnimation.ReloadGun ();
 			current_Hands_Weapon.Reload ();
 		}
+
 	}
 
 	void SelectWeapon() {
@@ -259,12 +344,13 @@ public class FPSController : MonoBehaviour {
 				current_Weapon = null;
 				weapon_Manager.weapons [0].SetActive (true);
 				current_Weapon = weapon_Manager.weapons [0].GetComponent<FPSWeapon> ();
+
 				playerAnimation.ChangeController (true);
 			}
 		}
 
 		if (Input.GetKeyDown (KeyCode.Alpha2)) {
-			
+
 			if (!handsWeapon_Manager.weapons [1].activeInHierarchy) {
 				for (int i = 0; i < handsWeapon_Manager.weapons.Length; i++) {
 					handsWeapon_Manager.weapons [i].SetActive (false);
@@ -284,6 +370,7 @@ public class FPSController : MonoBehaviour {
 				current_Weapon = null;
 				weapon_Manager.weapons [1].SetActive (true);
 				current_Weapon = weapon_Manager.weapons [1].GetComponent<FPSWeapon> ();
+
 				playerAnimation.ChangeController (false);
 			}
 		}
@@ -309,9 +396,57 @@ public class FPSController : MonoBehaviour {
 				current_Weapon = null;
 				weapon_Manager.weapons [2].SetActive (true);
 				current_Weapon = weapon_Manager.weapons [2].GetComponent<FPSWeapon> ();
+
 				playerAnimation.ChangeController (false);
 			}
 		}
 
 	}
-}
+
+} // class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

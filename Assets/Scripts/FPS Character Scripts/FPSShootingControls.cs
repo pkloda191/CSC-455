@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class FPSShootingControls : MonoBehaviour {
+public class FPSShootingControls : NetworkBehaviour {
 
 	private Camera mainCam;
 
@@ -29,7 +30,7 @@ public class FPSShootingControls : MonoBehaviour {
 			RaycastHit hit;
 
 			if (Physics.Raycast (mainCam.transform.position, mainCam.transform.forward, out hit)) {
-
+				
 				if (hit.transform.tag == "Enemy") {
 
 					CmdDealDamage (hit.transform.gameObject, hit.point, hit.normal);
@@ -43,11 +44,49 @@ public class FPSShootingControls : MonoBehaviour {
 		}
 	}
 
-	//[Command]
+	[Command]
 	void CmdDealDamage(GameObject obj, Vector3 pos, Vector3 rotation) {
-		//obj.GetComponent<PlayerHealth> ().TakeDamage (damageAmount);
+		obj.GetComponent<PlayerHealth> ().TakeDamage (damageAmount);
 
 		Instantiate (blood_Impact, pos, Quaternion.LookRotation (rotation));
 
 	}
-}
+
+} // class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

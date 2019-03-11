@@ -14,10 +14,49 @@ public class FPSWeapon : MonoBehaviour {
 	public void Shoot() {
 		StartCoroutine (TurnOnMuzzleFlash ());
 	}
-
+	
 	IEnumerator TurnOnMuzzleFlash() {
 		muzzleFlash.SetActive (true);
 		yield return new WaitForSeconds (0.1f);
 		muzzleFlash.SetActive (false);
 	}
-}
+
+} // class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

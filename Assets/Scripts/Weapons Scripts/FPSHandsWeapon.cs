@@ -20,7 +20,7 @@ public class FPSHandsWeapon : MonoBehaviour {
 		audioManager = GetComponent<AudioSource> ();
 		anim = GetComponent<Animator> ();
 	}
-
+	
 	public void Shoot() {
 		if (audioManager.clip != shootClip) {
 			audioManager.clip = shootClip;
@@ -51,4 +51,46 @@ public class FPSHandsWeapon : MonoBehaviour {
 		audioManager.Play ();
 	}
 
-}
+} // class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

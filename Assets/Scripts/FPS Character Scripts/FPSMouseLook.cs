@@ -25,17 +25,12 @@ public class FPSMouseLook : MonoBehaviour {
 
 	private float mouseSensivity = 1.7f;
 
-	// Use this for initialization
 	void Start () {
 		originalRotation = transform.rotation;
 	}
 
 	void LateUpdate () {
 		HandleRotation ();
-	}
-	// Update is called once per frame
-	void Update () {
-		
 	}
 
 	float ClampAngle(float angle, float min, float max) {
@@ -76,5 +71,48 @@ public class FPSMouseLook : MonoBehaviour {
 
 			transform.localRotation = originalRotation * yQuaternion;
 		}
+
 	}
-}
+
+} // class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
