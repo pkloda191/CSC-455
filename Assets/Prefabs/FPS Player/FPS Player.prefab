@@ -1288,6 +1288,7 @@ GameObject:
   - component: {fileID: 114889004553246074}
   - component: {fileID: 114546314754352754}
   - component: {fileID: 114799654512053586}
+  - component: {fileID: 114106837718617862}
   m_Layer: 0
   m_Name: FPS Player
   m_TagString: Enemy
@@ -9083,8 +9084,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d21aeac0145214415a10457aa4963a84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 6.75
-  runSpeed: 10
+  walkSpeed: 15
+  runSpeed: 45
   crouchSpeed: 4
   jumpSpeed: 8
   gravity: 20
@@ -9118,6 +9119,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+--- !u!114 &114106837718617862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1301966219645684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c9d7a735b2734aa19d07ef5bd196cb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114231495875568388
 MonoBehaviour:
   m_ObjectHideFlags: 1
