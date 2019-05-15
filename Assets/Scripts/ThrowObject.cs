@@ -6,13 +6,13 @@ public class ThrowObject : MonoBehaviour
 	public float throwForce = 200;
 	bool hasPlayer = false;
 	bool beingCarried = false;
-	private bool touched = false;
+	bool touched = false;
 	public float powerMult = 0;
 
 	void Update()
 	{
-		GameObject player2 = GameObject.Find("FPS Player(Clone)");
-		float dist = Vector3.Distance(gameObject.transform.position, player2.transform.position);
+		GameObject player = GameObject.Find("FPS Player(Clone)");
+		float dist = Vector3.Distance(gameObject.transform.position, player.transform.position);
 		//Debug.Log ("" + dist);
 		if (dist <= 1.5f)
 		{
@@ -28,7 +28,7 @@ public class ThrowObject : MonoBehaviour
 			GetComponent<Rigidbody>().isKinematic = true;
 			transform.position = new Vector3 (transform.position.x, transform.position.y + 1, transform.position.z);
 			transform.rotation = Quaternion.Euler (0,0,90);
-			transform.parent = player2.transform;
+			transform.parent = player.transform;
 			beingCarried = true;
 			powerMult = 0;
 		}
